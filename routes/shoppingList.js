@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   res.status(201).json({ success: true, payload: result });
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   const updatedItem = req.body;
   const result = await patchListItem(updatedItem);
   res.status(201).json({ success: true, payload: result });
