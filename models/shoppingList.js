@@ -23,10 +23,8 @@ export async function postListItem(listItem) {
 // receives an object: { id: idOfTickedItem, completed: !item.completed (true/false) }
 export async function patchListItem(id, isCompleted){
 const data = await pool.query(
-  `UPDATE shopping (
-    completed
-  ) VALUES ($1) WHERE id = ${id} RETURNING *;`,
-  [isCompleted]
+  `UPDATE shopping SET completed = ($1) WHERE id = ($2) RETURNING *;`,
+  [isCompleted, id]
 );
 return data.rows[0];
 }
