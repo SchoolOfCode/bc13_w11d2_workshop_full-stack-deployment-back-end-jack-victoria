@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 });
 
 router.patch("/", async (req, res) => {
-  const {updatedItem} = req.body;
+  const updatedItem = req.body;
   const result = await patchListItem(updatedItem);
   res.status(201).json({ success: true, payload: result });
 })
