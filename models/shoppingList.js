@@ -18,15 +18,13 @@ export async function postListItem(listItem) {
   return data.rows[0];
 }
 
-
 // create a patch function that will toggle just the completed value
 // receives an object: { id: idOfTickedItem, completed: !item.completed (true/false) }
-export async function patchListItem({id, completed}){
-  console.log("patchListItem called")
-const data = await pool.query(
-  `UPDATE shopping SET completed = ($1) WHERE id = ($2) RETURNING *;`,
-  [completed, id]
-);
-return data.rows[0];
+export async function patchListItem({ id, completed }) {
+  console.log("patchListItem called");
+  const data = await pool.query(
+    `UPDATE shopping SET completed = NOT completed WHERE id = ($1) RETURNING *;`,
+    [completed, id]
+  );
+  return data.rows[0];
 }
-
